@@ -2,7 +2,7 @@ import { ArrowRight, Phone } from 'lucide-react'
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-secondary via-white to-white pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-secondary via-white to-white overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-accent opacity-5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary opacity-5 rounded-full blur-3xl"></div>
