@@ -11,7 +11,7 @@ export function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Shankar Caterers</h3>
             <p className="text-sm opacity-90">
-              Premium North Indian catering services in East Delhi with 15+ years of experience.
+              Premium North Indian catering services in East Delhi with 30+ years of experience.
             </p>
           </div>
 

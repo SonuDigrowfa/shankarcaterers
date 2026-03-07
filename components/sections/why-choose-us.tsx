@@ -14,7 +14,7 @@ const reasons = [
   {
     icon: Users,
     title: 'Experienced Team',
-    description: 'Trained chefs and staff with 15+ years of professional catering experience'
+    description: 'Trained chefs and staff with 30+ years of professional catering experience'
   },
   {
     icon: Wallet,
@@ -69,7 +69,7 @@ export function WhyChooseUsSection() {
               <p className="text-muted-foreground">Events Successfully Catered</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-accent mb-2">15+</div>
+              <div className="text-4xl font-bold text-accent mb-2">30+</div>
               <p className="text-muted-foreground">Years of Experience</p>
             </div>
             <div>

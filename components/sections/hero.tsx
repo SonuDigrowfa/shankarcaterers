@@ -45,7 +45,7 @@ export function HeroSection() {
                 <div className="text-muted-foreground">Events Catered</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-accent">15+</div>
+                <div className="text-3xl font-bold text-accent">30+</div>
                 <div className="text-muted-foreground">Years Experience</div>
               </div>
               <div>
