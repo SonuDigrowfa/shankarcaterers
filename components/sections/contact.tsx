@@ -303,15 +303,7 @@ export function ContactSection() {
 
         {/* Map Section */}
         <div className="mt-16 bg-white rounded-xl overflow-hidden shadow-sm border border-border h-96">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.9849851337646!2d77.26783!3d28.597847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb000000000f%3A0x0!2sKarkardooma%2C%20East%20Delhi!5e0!3m2!1sen!2sin!4v1234567890"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.3631785381126!2d77.3031802!3d28.6488424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb3a7bde7fff%3A0xe8ee976402eef32e!2sShankar%20Caterers%20%26%20Sweets!5e0!3m2!1sen!2sin!4v1772875959316!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
