@@ -1,49 +1,63 @@
-export function GallerySection() {
-  const galleryItems = [
-    { emoji: '🍛', title: 'Delicious Curries', description: 'Authentic North Indian curries' },
-    { emoji: '👨‍🍳', title: 'Expert Chefs', description: 'Professional preparation' },
-    { emoji: '🥘', title: 'Fresh Preparation', description: 'Quality ingredients daily' },
-    { emoji: '🎉', title: 'Event Setup', description: 'Professional service' },
-    { emoji: '🥗', title: 'Variety Menu', description: 'Multiple dishes' },
-    { emoji: '⭐', title: 'Premium Quality', description: 'Highest standards' }
-  ]
+import Image from 'next/image'
+import { GALLERY_ITEMS } from '@/lib/business-data'
 
+export function GallerySection() {
   return (
-    <section className="py-20 bg-white">
+    <section id="gallery" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Our Gallery</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            See our catering setups, food preparations, and happy customer events
+        <div className="text-center mb-14">
+          <span className="text-xs font-bold uppercase tracking-widest text-primary">
+            Visual Showcase
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mt-2 mb-4">
+            Our Catering &amp; Event Gallery
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+            A glimpse into our wedding buffets, live Delhi chaat counters, pure-ghee mithai, and hygienic kitchen
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryItems.map((item, index) => (
-            <div
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {GALLERY_ITEMS.map((item, index) => (
+            <figure
               key={index}
-              className="relative h-64 rounded-xl overflow-hidden group cursor-pointer"
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-sm border border-border bg-secondary"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                <div className="text-6xl mb-3">{item.emoji}</div>
-                <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.description}</p>
-              </div>
-            </div>
+              <Image
+                src={item.image}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+
+              <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                {item.category}
+              </span>
+
+              <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                <p className="text-white/85 text-xs sm:text-sm leading-snug">
+                  {item.description}
+                </p>
+              </figcaption>
+            </figure>
           ))}
         </div>
 
-        <div className="mt-16 bg-gradient-to-r from-secondary to-white rounded-xl p-8 text-center border border-border">
-          <h3 className="text-2xl font-bold text-foreground mb-4">See More of Our Work</h3>
-          <p className="text-muted-foreground mb-6">
-            Check out our portfolio and past events. We pride ourselves on delivering exceptional catering experiences.
+        <div className="mt-14 bg-secondary/50 rounded-2xl p-8 text-center border border-border">
+          <h3 className="font-serif text-2xl font-bold text-foreground mb-3">
+            Want to See Sample Menus &amp; Event Packages?
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm sm:text-base">
+            Get in touch with us for customized wedding, birthday, or corporate catering menus tailored to your venue in East Delhi.
           </p>
           <a
             href="#contact"
-            className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300"
+            className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold shadow-sm hover:shadow-md transition-all"
           >
-            View More or Contact Us
+            Request Custom Quote
           </a>
         </div>
       </div>
