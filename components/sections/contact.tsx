@@ -2,9 +2,11 @@
 
 import { MapPin, Phone, Clock, MessageCircle, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { BUSINESS_INFO } from '@/lib/business-data'
 
 export function ContactSection() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -43,7 +45,12 @@ export function ContactSection() {
       })
 
       if (response.ok) {
-        setSubmitStatus('success')
+        const params = new URLSearchParams({
+          name: formData.name,
+          event: formData.eventType,
+          date: formData.eventDate,
+          guests: formData.guestCount,
+        })
         setFormData({
           name: '',
           email: '',
@@ -53,7 +60,7 @@ export function ContactSection() {
           guestCount: '',
           message: '',
         })
-        setTimeout(() => setSubmitStatus('idle'), 4000)
+        router.push(`/thank-you?${params.toString()}`)
       } else {
         setSubmitStatus('error')
         setTimeout(() => setSubmitStatus('idle'), 4000)
