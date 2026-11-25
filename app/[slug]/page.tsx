@@ -6,6 +6,7 @@ import { Phone, MapPin, CheckCircle2, ArrowLeft, HelpCircle, ArrowRight } from '
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/sections/footer'
 import { ContactSection } from '@/components/sections/contact'
+import { MobileActionBar } from '@/components/mobile-action-bar'
 import { BUSINESS_INFO, SITE_URL } from '@/lib/business-data'
 import { LANDING_PAGES, getLandingPageBySlug } from '@/lib/landing-pages'
 
@@ -330,6 +331,7 @@ export default async function LocalLandingPage({
       </main>
 
       <Footer />
+      <MobileActionBar />
     </>
   )
 }

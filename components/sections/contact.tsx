@@ -204,7 +204,7 @@ export function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -220,7 +220,7 @@ export function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                     placeholder="+91 98180 79174"
                   />
                 </div>
@@ -238,7 +238,7 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -253,7 +253,7 @@ export function ContactSection() {
                     value={formData.eventType}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                   >
                     <option value="">Select event type</option>
                     <option value="wedding">Wedding / Reception</option>
@@ -278,7 +278,7 @@ export function ContactSection() {
                     value={formData.eventDate}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     min="1"
-                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm"
+                    className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm"
                     placeholder="e.g. 150"
                   />
                 </div>
@@ -310,7 +310,7 @@ export function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-sm resize-none"
+                  className="w-full px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground text-base sm:text-sm resize-none"
                   placeholder="Share your venue area (e.g. Preet Vihar, Karkardooma) and preferred dishes..."
                 />
               </div>
@@ -360,7 +360,7 @@ export function ContactSection() {
         </div>
 
         {/* Google Map Embed */}
-        <div className="mt-14 bg-white rounded-2xl overflow-hidden shadow-sm border border-border h-96">
+        <div className="mt-10 sm:mt-14 bg-white rounded-2xl overflow-hidden shadow-sm border border-border h-64 sm:h-96">
           <iframe
             title="Shankar Caterers & Sweets Location in Karkardooma, East Delhi"
             src={BUSINESS_INFO.googleMapsEmbedUrl}

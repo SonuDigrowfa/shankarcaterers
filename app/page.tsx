@@ -10,6 +10,7 @@ import { GallerySection } from '@/components/sections/gallery'
 import { LocalAreasSection } from '@/components/sections/local-areas'
 import { ContactSection } from '@/components/sections/contact'
 import { Footer } from '@/components/sections/footer'
+import { MobileActionBar } from '@/components/mobile-action-bar'
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
+      <MobileActionBar />
     </>
   )
 }

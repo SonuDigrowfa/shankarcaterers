@@ -59,25 +59,25 @@ export function HeroSection() {
             </div>
 
             {/* Colorful Trust Stat Cards */}
-            <div className="grid grid-cols-3 gap-3 pt-4">
-              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3.5 border border-orange-200/80 shadow-xs">
-                <div className="font-serif text-2xl sm:text-3xl font-bold text-[#d9480f]">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-4">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-2.5 sm:p-3.5 border border-orange-200/80 shadow-xs text-center sm:text-left">
+                <div className="font-serif text-xl sm:text-3xl font-bold text-[#d9480f]">
                   {BUSINESS_INFO.stats.events}
                 </div>
-                <div className="text-xs font-medium text-[#5c4033]">Events Catered</div>
+                <div className="text-[11px] sm:text-xs font-medium text-[#5c4033]">Events Catered</div>
               </div>
-              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3.5 border border-amber-200/80 shadow-xs">
-                <div className="font-serif text-2xl sm:text-3xl font-bold text-[#d97706]">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-2.5 sm:p-3.5 border border-amber-200/80 shadow-xs text-center sm:text-left">
+                <div className="font-serif text-xl sm:text-3xl font-bold text-[#d97706]">
                   {BUSINESS_INFO.stats.experience}
                 </div>
-                <div className="text-xs font-medium text-[#5c4033]">Years Heritage</div>
+                <div className="text-[11px] sm:text-xs font-medium text-[#5c4033]">Years Heritage</div>
               </div>
-              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3.5 border border-emerald-200/80 shadow-xs">
-                <div className="font-serif text-2xl sm:text-3xl font-bold text-emerald-700 flex items-center gap-1">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-2.5 sm:p-3.5 border border-emerald-200/80 shadow-xs text-center sm:text-left">
+                <div className="font-serif text-xl sm:text-3xl font-bold text-emerald-700 flex items-center justify-center sm:justify-start gap-1">
                   {BUSINESS_INFO.stats.rating}
-                  <Star size={18} className="fill-amber-400 text-amber-500" />
+                  <Star size={16} className="fill-amber-400 text-amber-500" />
                 </div>
-                <div className="text-xs font-medium text-[#5c4033]">Local Rating</div>
+                <div className="text-[11px] sm:text-xs font-medium text-[#5c4033]">Local Rating</div>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
               {/* Floating badge */}
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-3 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-orange-100">
+              <div className="hidden sm:flex absolute bottom-6 left-6 right-6 flex-wrap items-center justify-between gap-3 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-orange-100">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
                     <ShieldCheck size={20} />
