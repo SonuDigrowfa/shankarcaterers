@@ -67,6 +67,19 @@ export function ContactSection() {
     }
   }
 
+  const buildWhatsAppBookingUrl = () => {
+    const lines = [
+      'Hello Shankar Caterers & Sweets, I want to book catering:',
+      formData.name ? `Name: ${formData.name}` : '',
+      formData.phone ? `Phone: ${formData.phone}` : '',
+      formData.eventType ? `Event: ${formData.eventType}` : '',
+      formData.eventDate ? `Date: ${formData.eventDate}` : '',
+      formData.guestCount ? `Guests: ${formData.guestCount}` : '',
+      formData.message ? `Details: ${formData.message}` : '',
+    ].filter(Boolean)
+    return `https://wa.me/919818079174?text=${encodeURIComponent(lines.join('\n'))}`
+  }
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -308,18 +321,40 @@ export function ContactSection() {
                 </div>
               )}
               {submitStatus === 'error' && (
-                <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-red-800 text-sm font-medium">
-                  Could not send form. Please call us directly at {BUSINESS_INFO.phone}.
+                <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-900 text-sm space-y-2.5">
+                  <p className="font-medium">
+                    Email server is temporarily unavailable. Send your details directly on WhatsApp or call {BUSINESS_INFO.phone}:
+                  </p>
+                  <a
+                    href={buildWhatsAppBookingUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#1a8f48] text-white px-4 py-2 rounded-lg font-semibold text-xs hover:bg-[#157a3d] transition-colors"
+                  >
+                    <MessageCircle size={15} />
+                    Send This Inquiry on WhatsApp
+                  </a>
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? 'Sending Request...' : 'Send Booking Request'}
-              </button>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Sending Request...' : 'Send Booking Request'}
+                </button>
+                <a
+                  href={buildWhatsAppBookingUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 bg-[#1a8f48] text-white py-3.5 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all"
+                >
+                  <MessageCircle size={18} />
+                  Book via WhatsApp
+                </a>
+              </div>
             </form>
           </div>
         </div>
