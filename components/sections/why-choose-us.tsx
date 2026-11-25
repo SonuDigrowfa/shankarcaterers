@@ -76,25 +76,25 @@ export function WhyChooseUsSection() {
           })}
         </div>
 
-        <div className="mt-14 bg-foreground text-background rounded-2xl p-8 sm:p-10 shadow-xl">
-          <div className="grid sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-background/15">
+        <div className="mt-14 bg-gradient-to-r from-[#5c1414] via-[#8c2318] to-[#b84314] text-white rounded-3xl p-8 sm:p-10 shadow-xl">
+          <div className="grid sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-white/20">
             <div className="pt-2 sm:pt-0">
-              <div className="font-serif text-4xl font-bold text-accent mb-1">
+              <div className="font-serif text-4xl font-bold text-amber-300 mb-1">
                 {BUSINESS_INFO.stats.events}
               </div>
-              <p className="text-sm text-background/80">Events Successfully Catered</p>
+              <p className="text-sm text-white/85">Events Successfully Catered</p>
             </div>
             <div className="pt-6 sm:pt-0">
-              <div className="font-serif text-4xl font-bold text-accent mb-1">
+              <div className="font-serif text-4xl font-bold text-amber-300 mb-1">
                 {BUSINESS_INFO.stats.experience}
               </div>
-              <p className="text-sm text-background/80">Years of Catering Heritage</p>
+              <p className="text-sm text-white/85">Years of Catering Heritage</p>
             </div>
             <div className="pt-6 sm:pt-0">
-              <div className="font-serif text-4xl font-bold text-accent mb-1">
+              <div className="font-serif text-4xl font-bold text-amber-300 mb-1">
                 {BUSINESS_INFO.stats.rating} ★
               </div>
-              <p className="text-sm text-background/80">Customer Satisfaction Rating</p>
+              <p className="text-sm text-white/85">Customer Satisfaction Rating</p>
             </div>
           </div>
         </div>

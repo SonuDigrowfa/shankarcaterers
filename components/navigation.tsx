@@ -20,15 +20,15 @@ export function Navigation() {
   return (
     <header className="sticky top-0 z-50">
       {/* Top local info bar for trust & local SEO */}
-      <div className="bg-foreground text-background/90 text-xs py-1.5 px-4 hidden sm:block">
+      <div className="bg-gradient-to-r from-[#7c1d18] via-[#b83b14] to-[#d97706] text-white text-xs py-2 px-4 hidden sm:block">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-1.5">
-            <MapPin size={13} className="text-accent" />
+            <MapPin size={13} className="text-amber-300" />
             <span>Karkardooma, East Delhi (110092) &bull; Serving Preet Vihar, Anand Vihar, Laxmi Nagar &amp; Delhi NCR</span>
           </div>
           <a
             href={BUSINESS_INFO.phoneHref}
-            className="font-semibold text-accent hover:underline"
+            className="font-semibold text-amber-200 hover:text-white transition-colors"
           >
             {BUSINESS_INFO.phone} &bull; Open 7 Days
           </a>

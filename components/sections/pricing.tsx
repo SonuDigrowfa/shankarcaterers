@@ -1,15 +1,24 @@
 import { Check, Phone, Sparkles } from 'lucide-react'
 import { BUSINESS_INFO, PRICING_PACKAGES } from '@/lib/business-data'
 
+const cardAccents = [
+  'border-t-4 border-t-emerald-500',
+  'border-t-4 border-t-orange-500 ring-2 ring-orange-400/30',
+  'border-t-4 border-t-rose-600',
+]
+
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-20 bg-white border-t border-border/60">
+    <section
+      id="pricing"
+      className="py-20 bg-gradient-to-b from-[#fffaf2] to-[#fff3e0]/60 border-t border-orange-100"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9a3412] bg-amber-100 px-3.5 py-1 rounded-full">
             Transparent Catering Packages
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mt-2 mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-4">
             Catering Packages &amp; Per-Plate Cost in East Delhi
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -23,18 +32,18 @@ export function PricingSection() {
             return (
               <div
                 key={pkg.title}
-                className={`rounded-2xl p-7 sm:p-8 flex flex-col border transition-all duration-300 ${
-                  isFeatured
-                    ? 'bg-secondary/50 border-primary shadow-lg relative'
-                    : 'bg-card border-border shadow-sm hover:shadow-md'
-                }`}
+                className={`rounded-2xl p-7 sm:p-8 flex flex-col border bg-white transition-all duration-300 ${
+                  cardAccents[idx] || ''
+                } ${isFeatured ? 'shadow-xl scale-[1.01]' : 'border-orange-100 shadow-sm hover:shadow-lg'}`}
               >
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <span
                     className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
                       isFeatured
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-secondary text-foreground'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-xs'
+                        : idx === 0
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'bg-rose-100 text-rose-800'
                     }`}
                   >
                     {isFeatured && <Sparkles size={12} />}
@@ -49,7 +58,7 @@ export function PricingSection() {
                   {pkg.title}
                 </h3>
                 <div className="mb-1">
-                  <span className="text-2xl sm:text-3xl font-bold text-primary">
+                  <span className="text-2xl sm:text-3xl font-bold text-[#d9480f]">
                     {pkg.priceRange}
                   </span>
                 </div>
@@ -64,7 +73,7 @@ export function PricingSection() {
                 <ul className="space-y-2.5 mb-8 flex-1">
                   {pkg.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-foreground">
-                      <Check size={17} className="text-primary flex-shrink-0 mt-0.5" />
+                      <Check size={17} className="text-emerald-600 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -74,8 +83,8 @@ export function PricingSection() {
                   href={BUSINESS_INFO.phoneHref}
                   className={`w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full font-semibold text-sm transition-all ${
                     isFeatured
-                      ? 'bg-primary text-primary-foreground shadow-sm hover:shadow-md'
-                      : 'bg-white border-2 border-primary/30 text-foreground hover:border-primary hover:text-primary'
+                      ? 'bg-gradient-to-r from-[#d9480f] to-[#d97706] text-white shadow-md hover:shadow-lg'
+                      : 'bg-orange-50 border border-orange-200 text-[#9a3412] hover:bg-orange-100'
                   }`}
                 >
                   <Phone size={16} />
