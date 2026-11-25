@@ -1,6 +1,14 @@
 import { BUSINESS_INFO, FAQ_ITEMS, SERVICE_AREAS, SITE_URL } from '@/lib/business-data'
 
 export function SeoJsonLd() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: BUSINESS_INFO.name,
+    alternateName: ['Shankar Caterers', 'Shankar Caterers East Delhi'],
+    url: SITE_URL,
+  }
+
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': ['Caterer', 'FoodEstablishment', 'LocalBusiness'],
@@ -76,6 +84,10 @@ export function SeoJsonLd() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}

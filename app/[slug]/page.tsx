@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Phone, MapPin, CheckCircle2, ArrowLeft, HelpCircle } from 'lucide-react'
+import { Phone, MapPin, CheckCircle2, ArrowLeft, HelpCircle, ArrowRight } from 'lucide-react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/sections/footer'
 import { ContactSection } from '@/components/sections/contact'
@@ -29,8 +29,26 @@ export async function generateMetadata({
   return {
     title: page.metaTitle,
     description: page.metaDescription,
+    keywords: [
+      page.title,
+      `${page.title} near me`,
+      `${page.title} with price`,
+      ...page.nearbyAreas.map((area) => `caterers in ${area}`),
+      'Shankar Caterers & Sweets',
+      'North Indian catering East Delhi',
+    ],
     alternates: {
       canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
     openGraph: {
       type: 'website',
@@ -48,6 +66,12 @@ export async function generateMetadata({
         },
       ],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: page.metaTitle,
+      description: page.metaDescription,
+      images: [page.image],
+    },
   }
 }
 
@@ -60,13 +84,17 @@ export default async function LocalLandingPage({
   const page = getLandingPageBySlug(slug)
   if (!page) notFound()
 
-  const jsonLd = {
+  const pageUrl = `${SITE_URL}/${page.slug}`
+  const otherPages = LANDING_PAGES.filter((p) => p.slug !== page.slug)
+
+  const localBusinessSchema = {
     '@context': 'https://schema.org',
-    '@type': ['Caterer', 'LocalBusiness'],
+    '@type': ['Caterer', 'FoodEstablishment', 'LocalBusiness'],
     name: BUSINESS_INFO.name,
-    url: `${SITE_URL}/${page.slug}`,
+    url: pageUrl,
     telephone: '+91-98180-79174',
     priceRange: '₹₹',
+    image: `${SITE_URL}${page.image}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: BUSINESS_INFO.address.streetAddress,
@@ -75,30 +103,90 @@ export default async function LocalLandingPage({
       postalCode: BUSINESS_INFO.address.postalCode,
       addressCountry: 'IN',
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: BUSINESS_INFO.geo.latitude,
+      longitude: BUSINESS_INFO.geo.longitude,
+    },
     areaServed: page.nearbyAreas.map((area) => ({
       '@type': 'Place',
       name: `${area}, Delhi NCR, India`,
     })),
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '500',
+    },
   }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: page.title,
+        item: pageUrl,
+      },
+    ],
+  }
+
+  const faqSchema =
+    page.faq.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: page.faq.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answer,
+            },
+          })),
+        }
+      : null
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <Navigation />
 
       <main className="w-full overflow-hidden">
         {/* Hero */}
         <section className="bg-gradient-to-b from-secondary/70 via-background to-background py-12 lg:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline mb-6"
-            >
-              <ArrowLeft size={16} /> Back to Home
-            </Link>
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+              >
+                <ArrowLeft size={16} /> Home
+              </Link>
+              <span className="mx-2 text-muted-foreground text-sm">/</span>
+              <span className="text-sm text-muted-foreground">{page.title}</span>
+            </nav>
 
             <div className="grid lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-6 space-y-5">
@@ -169,50 +257,71 @@ export default async function LocalLandingPage({
 
         {/* Highlights & Nearby Areas */}
         <section className="py-16 bg-white border-t border-border/60">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10">
-            <div className="bg-secondary/30 rounded-2xl p-7 border border-border">
-              <h2 className="font-serif text-2xl font-bold text-foreground mb-5">
-                Why Choose Shankar Caterers Here
-              </h2>
-              <ul className="space-y-3.5">
-                {page.highlights.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm sm:text-base">
-                    <CheckCircle2 size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-secondary/30 rounded-2xl p-7 border border-border">
-              <h2 className="font-serif text-2xl font-bold text-foreground mb-5">
-                Nearby Localities We Cover
-              </h2>
-              <div className="flex flex-wrap gap-2.5 mb-6">
-                {page.nearbyAreas.map((area) => (
-                  <span
-                    key={area}
-                    className="inline-flex items-center gap-1.5 bg-white border border-border rounded-full px-3.5 py-1.5 text-sm font-medium"
-                  >
-                    <MapPin size={14} className="text-primary" />
-                    {area}
-                  </span>
-                ))}
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="grid md:grid-cols-2 gap-10">
+              <div className="bg-secondary/30 rounded-2xl p-7 border border-border">
+                <h2 className="font-serif text-2xl font-bold text-foreground mb-5">
+                  Why Choose Shankar Caterers Here
+                </h2>
+                <ul className="space-y-3.5">
+                  {page.highlights.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm sm:text-base">
+                      <CheckCircle2 size={20} className="text-primary flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {page.faq.length > 0 && (
-                <div className="space-y-3 pt-4 border-t border-border/80">
-                  {page.faq.map((f) => (
-                    <div key={f.question}>
-                      <h3 className="flex items-start gap-2 font-bold text-sm sm:text-base text-foreground mb-1">
-                        <HelpCircle size={17} className="text-primary flex-shrink-0 mt-0.5" />
-                        <span>{f.question}</span>
-                      </h3>
-                      <p className="text-xs sm:text-sm text-muted-foreground pl-6">{f.answer}</p>
-                    </div>
+              <div className="bg-secondary/30 rounded-2xl p-7 border border-border">
+                <h2 className="font-serif text-2xl font-bold text-foreground mb-5">
+                  Nearby Localities We Cover
+                </h2>
+                <div className="flex flex-wrap gap-2.5 mb-6">
+                  {page.nearbyAreas.map((area) => (
+                    <span
+                      key={area}
+                      className="inline-flex items-center gap-1.5 bg-white border border-border rounded-full px-3.5 py-1.5 text-sm font-medium"
+                    >
+                      <MapPin size={14} className="text-primary" />
+                      {area}
+                    </span>
                   ))}
                 </div>
-              )}
+
+                {page.faq.length > 0 && (
+                  <div className="space-y-3 pt-4 border-t border-border/80">
+                    {page.faq.map((f) => (
+                      <div key={f.question}>
+                        <h3 className="flex items-start gap-2 font-bold text-sm sm:text-base text-foreground mb-1">
+                          <HelpCircle size={17} className="text-primary flex-shrink-0 mt-0.5" />
+                          <span>{f.question}</span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground pl-6">{f.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Internal Cross-Linking to Other Local SEO Pages */}
+            <div className="bg-secondary/20 rounded-2xl p-7 border border-border">
+              <h2 className="font-serif text-xl font-bold text-foreground mb-4">
+                Other East Delhi Catering Locations &amp; Packages
+              </h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {otherPages.map((other) => (
+                  <Link
+                    key={other.slug}
+                    href={`/${other.slug}`}
+                    className="flex items-center justify-between gap-2 rounded-xl border border-border/80 bg-white px-4 py-2.5 text-sm font-medium text-foreground hover:border-primary hover:text-primary transition-colors"
+                  >
+                    <span>{other.title}</span>
+                    <ArrowRight size={14} className="text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>
